@@ -7,9 +7,9 @@ router.post("/", async (req, res) => {
     `INSERT INTO items (name,description,price,stock) VALUES (${JSON.stringify(
       req.body.name
     )}, ${JSON.stringify(req.body.description)},${req.body.price},${
-      req.body.stock
+    req.body.stock
     })`,
-    function(err) {
+    function (err) {
       if (err) {
         res.status(503).send({ error: err });
       } else {
