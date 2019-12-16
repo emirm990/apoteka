@@ -5,7 +5,7 @@ const connection = require("../../db/connection");
 router.get("/", async (req, res) => {
   await connection.query(
     `SELECT * FROM items WHERE id = ${req.query.id}`,
-    function(err, rows) {
+    function (err, rows) {
       if (err) {
         res.status(503).send({ error: err });
       } else {
@@ -19,9 +19,9 @@ router.post("/", async (req, res) => {
     `UPDATE items SET name=${JSON.stringify(
       req.body.name
     )},description=${JSON.stringify(req.body.description)},price=${
-      req.body.price
+    req.body.price
     },stock=${req.body.stock} WHERE id=${req.query.id}`,
-    function(err, row) {
+    function (err, row) {
       if (err) {
         res.status(503).send({ error: err.affectedRows });
       } else {
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/", async (req, res) => {
-  await connection.query(`DELETE FROM items WHERE id=${req.query.id}`, function(
+  await connection.query(`DELETE FROM items WHERE id=${req.query.id}`, function (
     err,
     results,
     fields
