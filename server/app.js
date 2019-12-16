@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const connection = require("./db/connection");
+const path = require("path");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
@@ -19,8 +20,11 @@ connection.connect(err => {
 const items = require("./routes/api/items");
 const newItem = require("./routes/api/newItem");
 const editItem = require("./routes/api/editItem");
+const upload = require("./routes/api/upload");
+const dir = path.join(__dirname, 'public/uploads/images');
+app.use(express.static(dir))
 app.use("/api/items", items);
 app.use("/api/new", newItem);
 app.use("/api/edit", editItem);
-
+app.use("/api/upload", upload);
 app.listen(PORT, () => console.log(`Server is started on port ${PORT}`));
