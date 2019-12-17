@@ -4,7 +4,12 @@ const connection = require("../../db/connection");
 
 router.get("/", async (req, res) => {
   await connection.query(
-    `SELECT * FROM items WHERE id = ${req.query.id}`,
+    `SELECT i.id,name,description,stock,price,picture,extension,item_id
+     FROM items i 
+     LEFT JOIN images p 
+     ON i.id=p.item_id 
+     WHERE i.id=${req.query.id}
+    `,
     function (err, rows) {
       if (err) {
         res.status(503).send({ error: err });
@@ -21,11 +26,11 @@ router.post("/", async (req, res) => {
     )},description=${JSON.stringify(req.body.description)},price=${
     req.body.price
     },stock=${req.body.stock} WHERE id=${req.query.id}`,
-    function (err, row) {
+    function (err) {
       if (err) {
-        res.status(503).send({ error: err.affectedRows });
+        res.status(503).send({ error: err });
       } else {
-        res.status(201).send({ message: row });
+        res.status(201).send({ message: "Item updated!" });
       }
     }
   );
