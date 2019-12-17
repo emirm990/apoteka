@@ -5,7 +5,7 @@
     <p>{{price}}</p>
     <p>{{stock}}</p>
     <img :src="url" />
-    <button v-if="editable" @click="getItem">Edit</button>
+    <router-link :to="`/edit/${this.id}`" v-if="editable" @click="getItem" :id="this.id">Edit</router-link>
   </li>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      url: "http://localhost:3000/" + this.picture + "." + this.extension,
+      url: "http://localhost:3000/images/" + this.picture,
       item_id: this.id,
       item_name: this.name,
       item_description: this.description,
