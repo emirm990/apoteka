@@ -30,14 +30,32 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Dashboard.vue")
   },
   {
-    path: "/edit/:id",
+    path: "/dashboard/edit",
+    name: "edit",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/EditItems.vue")
+  },
+  {
+    path: "/dashboard/edit/:id",
     name: "editview",
-    props: (route) => ({ id: Number(route.params.id) }),
+    props: route => ({ id: Number(route.params.id) }),
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/EditView.vue")
+  },
+  {
+    path: "/dashboard/new",
+    name: "new",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/NewItem.vue")
   }
 ];
 
