@@ -1,18 +1,12 @@
-<template >
+<template>
   <div class="about">
     <h1>This is an about page</h1>
-    <Items :editable="true" />
-    <NewItem />
+    <router-link to="/dashboard/edit">Edit Items</router-link>
+    <router-link to="/dashboard/new">New Item</router-link>
   </div>
 </template>
 <script>
-import Items from "@/components/Items.vue";
-import NewItem from "@/components/NewItem.vue";
 export default {
-  name: "dashboard",
-  components: {
-    Items,
-    NewItem
-  }
+  name: "dashboard"
 };
 </script>
