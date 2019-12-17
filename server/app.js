@@ -6,6 +6,8 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,12 +19,13 @@ connection.connect(err => {
     console.log("Connected!");
   }
 });
+
 const items = require("./routes/api/items");
 const newItem = require("./routes/api/newItem");
 const editItem = require("./routes/api/editItem");
 const upload = require("./routes/api/upload");
-const dir = path.join(__dirname, 'public/uploads/images');
-app.use(express.static(dir))
+
+app.use('/images', express.static(path.join(__dirname, 'public/uploads/images')));
 app.use("/api/items", items);
 app.use("/api/new", newItem);
 app.use("/api/edit", editItem);
