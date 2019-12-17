@@ -1,11 +1,17 @@
 <template>
   <li>
-    <h2>{{name}}</h2>
-    <p>{{description}}</p>
-    <p>{{price}}</p>
-    <p>{{stock}}</p>
+    <h2>{{ name }}</h2>
+    <p>{{ description }}</p>
+    <p>{{ price }}</p>
+    <p>{{ stock }}</p>
     <img :src="url" />
-    <router-link :to="`/edit/${this.id}`" v-if="editable" @click="getItem" :id="this.id">Edit</router-link>
+    <router-link
+      :to="`/dashboard/edit/${this.id}`"
+      v-if="editable"
+      @click="getItem"
+      :id="this.id"
+      >Edit</router-link
+    >
   </li>
 </template>
 
