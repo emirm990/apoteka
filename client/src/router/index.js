@@ -22,7 +22,6 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -32,6 +31,7 @@ const routes = [
   {
     path: "/dashboard/edit",
     name: "edit",
+    props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -41,7 +41,7 @@ const routes = [
   {
     path: "/dashboard/edit/:id",
     name: "editview",
-    props: route => ({ id: Number(route.params.id) }),
+    props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -51,6 +51,7 @@ const routes = [
   {
     path: "/dashboard/new",
     name: "new",
+    props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
