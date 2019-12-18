@@ -7,7 +7,6 @@ const upload = multer({ dest: destination });
 const connection = require("../../db/connection");
 const deleteFiles = require("../../delete");
 
-console.log(destination);
 router.post("/", upload.single("photo"), async (req, res) => {
   if (req.file) {
     let extArray = req.file.mimetype.split("/");
@@ -18,11 +17,11 @@ router.post("/", upload.single("photo"), async (req, res) => {
       `INSERT INTO images(picture, extension, item_id) VALUES (${JSON.stringify(
         req.file.filename
       )}, ${JSON.stringify(extension)}, ${
-        req.query.id
+      req.query.id
       }) ON DUPLICATE KEY UPDATE picture=${JSON.stringify(
         req.file.filename
       )},extension=${JSON.stringify(extension)}`,
-      function(err) {
+      function (err) {
         if (err) {
           res.status(503).send({ error: err });
         } else {
@@ -41,7 +40,7 @@ router.post("/", upload.single("photo"), async (req, res) => {
 router.get("/", async (req, res) => {
   await connection.query(
     `SELECT * FROM images WHERE item_id=${req.query.id}`,
-    function(err, rows) {
+    function (err, rows) {
       if (err) {
         res.status(503).send({ error: err });
       } else {
