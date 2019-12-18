@@ -12,6 +12,8 @@
         :picture="item.picture"
         :extension="item.extension"
         :editable="editable"
+        :auth="auth"
+        @itemDeleted="reload"
       />
     </ul>
   </div>
@@ -20,14 +22,14 @@
 <script>
 import ItemsService from "../../ItemsService";
 import Item from "./Item";
-import { EventBus } from "../event-bus";
 export default {
   name: "Items",
   components: {
     Item
   },
   props: {
-    editable: Boolean
+    editable: Boolean,
+    auth: Boolean
   },
   data() {
     return {
@@ -42,7 +44,6 @@ export default {
     } catch (err) {
       this.error = err;
     }
-    EventBus.$on("itemAdded", this.reload);
   },
   methods: {
     async reload() {
