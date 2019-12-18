@@ -5,13 +5,13 @@
     <p>{{ price }}</p>
     <p>{{ stock }}</p>
     <img :src="url" />
-    <router-link
-      :to="`/dashboard/edit/${this.id}`"
-      v-if="editable"
-      @click="getItem"
-      :id="this.id"
-      >Edit</router-link
-    >
+    <button v-if="editable">
+      <router-link
+        :to="{path: `/dashboard/edit/${this.id}`, params: {auth: this.auth, id: this.id}}"
+        :id="this.id"
+      >Edit</router-link>
+    </button>
+    <button v-if="editable" @click="deleteItem" :id="this.id">Delete</button>
   </li>
 </template>
 
@@ -27,7 +27,8 @@ export default {
     stock: Number,
     picture: String,
     extension: String,
-    editable: Boolean
+    editable: Boolean,
+    auth: Boolean
   },
   data() {
     return {
@@ -40,10 +41,14 @@ export default {
     };
   },
   methods: {
-    async getItem() {
+    /*async getItem() {
       let itemDetails = await EditService.getItem(this.id);
       //eslint-disable-next-line no-console
       console.log(itemDetails.data);
+    },*/
+    async deleteItem() {
+      await EditService.deleteItem(this.id);
+      this.$emit("itemDeleted");
     }
   }
 };
