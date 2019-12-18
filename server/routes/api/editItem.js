@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../../db/connection");
+const deleteFiles = require("../../delete");
 
 router.get("/", async (req, res) => {
   await connection.query(
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/", async (req, res) => {
-  await connection.query(`DELETE FROM items WHERE id=${req.query.id}`, function (
+  await connection.query(`DELETE items, images FROM items JOIN images ON items.id = images.item_id WHERE items.id = ${req.query.id}`, function (
     err,
     results,
     fields
@@ -45,7 +46,8 @@ router.delete("/", async (req, res) => {
     if (err) {
       res.status(503).send({ error: err });
     } else {
-      res.status(201).send({ message: results.affectedRows });
+      deleteFiles.deleteFiles();
+      res.status(201).send({ message: results });
     }
   });
 });
