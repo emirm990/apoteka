@@ -42,7 +42,8 @@ import UploadService from "../../UploadService";
 export default {
   name: "EditItem",
   props: {
-    id: Number
+    id: Number,
+    auth: Boolean
   },
   data() {
     return {
