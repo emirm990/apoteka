@@ -13,5 +13,8 @@ class EditService {
             stock
         });
     }
+    static deleteItem(id) {
+        return axios.delete(url + "?id=" + id);
+    }
 }
 export default EditService;
