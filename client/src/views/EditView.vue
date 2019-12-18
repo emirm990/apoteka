@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an Edit View</h1>
-    <EditItem :id="id" />
+    <EditItem :id="this.id" :auth="this.auth" />
   </div>
 </template>
 <script>
@@ -13,7 +13,8 @@ export default {
     EditItem
   },
   props: {
-    id: Number
+    id: Number,
+    auth: Boolean
   }
 };
 </script>
