@@ -9,11 +9,12 @@ router.post("/", async (req, res) => {
     )}, ${JSON.stringify(req.body.description)},${req.body.price},${
     req.body.stock
     })`,
-    function (err) {
+    function (err, results) {
       if (err) {
         res.status(503).send({ error: err });
       } else {
-        res.status(201).send({ Message: "New item added!" });
+        res.status(201).send(results);
+        //res.status(201).send({ Message: "New item added!" });
       }
     }
   );
