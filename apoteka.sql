@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2019 at 08:20 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Generation Time: Dec 18, 2019 at 03:37 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,10 +40,9 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `picture`, `extension`, `item_id`) VALUES
-(0, '38b91930d599cb49869cdeecf9c05a75', 'jpeg', 7),
-(0, '403e1271d4fa31242940b893dd462b45', 'jpeg', 8),
-(0, '94946161cb6ce1b776e732d8ac9e2657', 'jpeg', 9),
-(0, '57594b10f5875a4d4b5e0e34f75d7405', 'jpeg', 10);
+(0, '91997ce34a44a5c6c3b10b2417e0c1bc', 'png', 31),
+(0, 'f14c1391507da7a15e780bc7df4d9561', 'jpeg', 38),
+(0, '27f3c8b7c7a6507c727ef319c9e8247c', 'jpeg', 41);
 
 -- --------------------------------------------------------
 
@@ -53,8 +52,8 @@ INSERT INTO `images` (`id`, `picture`, `extension`, `item_id`) VALUES
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `name` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `name` text,
+  `description` text,
   `price` float DEFAULT NULL,
   `stock` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -64,10 +63,31 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `name`, `description`, `price`, `stock`) VALUES
-(7, 'paracetamol', 'lijek protiv prehlade i gripe', 250, 1000),
-(8, 'caffetin', 'lijek protiv bolova', 5, 500),
-(9, 'aspirin', 'lijek protiv svega', 7, 250),
-(10, 'Adina', 'Lijek za sve', 1e19, 1);
+(31, 'test 5', 'test 5', 250, 2000),
+(38, 'razvalgin', 'lijek protiv bolova', 4, 100),
+(39, 'autentifikacija poslije login', 'lijek protiv bolova', 4, 100),
+(40, 'autentifikacija poslije login', 'lijek protiv bolova', 4, 100),
+(41, 'test', 'test', 245, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `password` text COLLATE utf8_unicode_ci NOT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`, `last_login`) VALUES
+(1, 'emirm@live.com', '$2a$10$BxA/GOkJU3ADGt8CLtR3fOezwklTQlgcd4VgqkiNKjjC2cmqs2AEW', '2019-12-18 09:40:42');
 
 --
 -- Indexes for dumped tables
@@ -86,6 +106,12 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -93,7 +119,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
